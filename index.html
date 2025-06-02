@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ultra Craft - Loja Oficial</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    /* Variáveis CSS para fácil modificação das cores */
+    :root {
+      --cor-primaria: #007bff; /* Azul principal */
+      --cor-secundaria: #0056b3; /* Azul mais escuro */
+      --cor-fundo-base: #001f40; /* Azul bem escuro para o fundo base */
+      --cor-texto-claro: #add8e6; /* Azul claro para texto */
+      --cor-texto-medio: #87ceeb; /* Azul médio para destaque */
+      --cor-borda: #4682b4; /* Azul para bordas e brilhos (SteelBlue) */
+      --cor-fundo-card: rgba(0, 40, 80, 0.7); /* Fundo dos cards com transparência */
+      --sombra-leve: 0 0 10px rgba(70, 130, 180, 0.4);
+      --sombra-media: 0 0 20px rgba(70, 130, 180, 0.6);
+      --sombra-forte: 0 0 30px rgba(70, 130, 180, 0.8);
+      --brilho-roxo: drop-shadow(0 0 8px var(--cor-borda)) drop-shadow(0 0 15px rgba(0, 123, 255, 0.6));
+      --destaque-amarelo: #FFD700; /* Dourado para destaque */
+      --destaque-verde: #32CD32; /* Verde para destaque positivo */
+      --red-attention: #ff4d4d; /* Vermelho para atenção */
+    }
+
+    * {
+      box-sizing: border-box;
+      user-select: none; /* Desabilita seleção de texto padrão, exceto onde especificado */
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--cor-fundo-base); /* Cor de fundo base */
+      color: var(--cor-texto-claro);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative; /* Necessário para o pseudo-elemento */
+    }
+
+    /* Fundo de imagem total */
+    body::before {
+      content: '';
+      position: fixed; /* Fixa o fundo */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('./logo/galaxy-background.png') no-repeat center center / cover; /* Caminho corrigido para sua imagem de fundo */
+      opacity: 0.15; /* Ajuste a opacidade para não atrapalhar a leitura, um pouco mais sutil */
+      z-index: -2; /* Garante que fique bem no fundo */
+      animation: panBackground 60s linear infinite; /* Animação de movimento sutil */
+    }
+
+    @keyframes panBackground {
+      0% { background-position: 0% 0%; }
+      50% { background-position: 100% 100%; }
+      100% { background-position: 0% 0%; }
+    }
+
+    /* Gradiente sutil por cima do fundo para dar mais profundidade */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(0, 60, 120, 0.1) 0%, rgba(0, 31, 64, 0.85) 70%); /* Mais opaco nas bordas */
+      z-index: -1;
+      pointer-events: none; /* Permite interagir com o conteúdo por baixo */
+    }
+
+    header {
+      background: rgba(0, 60, 120, 0.85); /* Fundo mais transparente para ver o fundo da imagem */
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: var(--sombra-forte);
+      position: relative;
+      user-select: none;
+      border-bottom: 2px solid var(--cor-borda);
+      backdrop-filter: blur(8px); /* Efeito de desfoque mais forte no header */
+      animation: headerSlideDown 0.8s ease-out forwards;
+    }
+
+    @keyframes headerSlideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    #logo {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 15px;
+      cursor: grab;
+      border-radius: 50%;
+      box-shadow: var(--sombra-media);
+      background: url('./logo/logo.png') no-repeat center/contain; /* Caminho corrigido para sua logo principal */
+      background-color: var(--cor-fundo-base);
+      transition: all 0.4s ease;
+      position: relative;
+      z-index: 10; /* Z-index alto para a logo principal */
+      border: 3px solid var(--cor-primaria); /* Borda destacada */
+      filter: var(--brilho-roxo); /* Brilho na logo */
+      animation: logoPulse 2s infinite alternate; /* Animação de pulsação na logo */
+    }
+    #logo:active {
+      cursor: grabbing;
+      box-shadow: var(--sombra-forte);
+      transform: scale(1.05);
+    }
+
+    @keyframes logoPulse {
+      0% { transform: scale(1); box-shadow: var(--sombra-media); }
+      100% { transform: scale(1.03); box-shadow: var(--sombra-forte); }
+    }
+
+    header h1 {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.8rem; /* Aumenta o tamanho do título */
+      color: var(--cor-primaria);
+      text-shadow: 0 0 15px var(--cor-borda), 0 0 25px rgba(0, 123, 255, 0.7); /* Mais brilho */
+      letter-spacing: 3px; /* Aumenta o espaçamento */
+      animation: neonGlow 2s ease-in-out infinite alternate; /* Animação de brilho neon */
+      position: relative;
+      z-index: 5;
+    }
+
+    @keyframes neonGlow {
+      from { text-shadow: 0 0 10px var(--cor-primaria), 0 0 20px var(--cor-borda); }
+      to { text-shadow: 0 0 20px var(--cor-primaria), 0 0 30px var(--cor-borda), 0 0 40px rgba(0, 123, 255, 0.5); }
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 1.3rem; /* Aumenta o tamanho do parágrafo */
+      color: var(--cor-texto-medio);
+      text-shadow: var(--sombra-leve);
+      position: relative;
+      z-index: 5;
+    }
+
+    nav {
+      background: rgba(0, 90, 180, 0.9); /* Fundo da nav mais transparente e escuro */
+      display: flex;
+      justify-content: center;
+      gap: 35px; /* Aumenta o espaçamento entre botões */
+      padding: 20px 0; /* Aumenta o padding */
+      box-shadow: var(--sombra-media);
+      border-bottom: 2px solid var(--cor-borda);
+      backdrop-filter: blur(5px); /* Desfoque sutil */
+      animation: navFadeIn 1s ease-out forwards 0.5s; /* Atraso na animação */
+      opacity: 0; /* Começa invisível */
+    }
+
+    @keyframes navFadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    nav button {
+      background: linear-gradient(135deg, var(--cor-secundaria), var(--cor-primaria)); /* Gradiente nos botões */
+      border: none; /* Remove a borda padrão */
+      border-radius: 30px; /* Mais arredondado */
+      padding: 14px 35px; /* Aumenta o padding */
+      color: white; /* Cor do texto branco */
+      font-size: 1.2rem; /* Aumenta o tamanho da fonte */
+      cursor: pointer;
+      transition: all 0.4s ease;
+      user-select: none;
+      font-weight: 700; /* Mais negrito */
+      text-transform: uppercase;
+      letter-spacing: 2px; /* Mais espaçamento */
+      box-shadow: 0 0 15px rgba(0, 123, 255, 0.5); /* Sombra mais destacada */
+      position: relative;
+      overflow: hidden;
+      transform: skewX(-5deg); /* Leve inclinação para um visual dinâmico */
+    }
+
+    nav button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: 0.6s ease-in-out; /* Transição mais suave */
+      transform: skewX(20deg); /* Inclinação para o brilho */
+    }
+
+    nav button:hover::before {
+      left: 100%;
+    }
+
+    nav button:hover,
+    nav button.active {
+      background: linear-gradient(135deg, var(--cor-primaria), var(--cor-borda)); /* Gradiente de hover */
+      color: #fff; /* Texto branco no hover */
+      box-shadow: 0 0 25px var(--cor-borda), 0 0 40px rgba(0, 123, 255, 0.8); /* Sombra forte */
+      transform: translateY(-5px) skewX(-5deg); /* Movimento e inclinação */
+      border: none; /* Remove borda no hover também */
+    }
+
+    main {
+      flex-grow: 1;
+      padding: 50px 20px; /* Mais padding */
+      max-width: 1300px; /* Largura máxima maior */
+      margin: 0 auto;
+      color: var(--cor-texto-claro);
+      text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+      position: relative;
+      z-index: 1; /* Garante que o conteúdo esteja acima dos fundos */
+    }
+
+    /* Abas */
+    .tab-content {
+      display: none;
+      animation: slideInFromTop 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; /* Animação mais suave */
+      background: var(--cor-fundo-card); /* Fundo para as abas */
+      border: 2px solid var(--cor-borda);
+      border-radius: 25px;
+      padding: 30px;
+      margin-top: 30px; /* Espaçamento do menu */
+      box-shadow: var(--sombra-forte);
+    }
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes slideInFromTop {
+      0% { opacity: 0; transform: translateY(-30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .tab-content h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.8rem;
+      color: var(--cor-primaria);
+      text-shadow: 0 0 15px var(--cor-borda);
+      margin-bottom: 30px;
+      text-align: center;
+      position: relative;
+    }
+    .tab-content h2::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, transparent, var(--cor-primaria), transparent);
+        margin: 15px auto 0;
+        border-radius: 2px;
+    }
+
+    /* Frases destacadas dentro das abas */
+    .highlight-text {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--destaque-amarelo);
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+      margin-bottom: 20px;
+      line-height: 1.6;
+      text-align: center;
+      padding: 15px;
+      border: 1px dashed var(--destaque-amarelo);
+      border-radius: 10px;
+      animation: textPulse 2s infinite alternate;
+    }
+
+    @keyframes textPulse {
+      0% { transform: scale(1); opacity: 0.9; }
+      100% { transform: scale(1.01); opacity: 1; }
+    }
+
+    /* Seção Principal */
+    #principal p {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      margin-bottom: 15px;
+      text-align: justify;
+      word-spacing: normal; /* Garante espaçamento normal entre as palavras */
+    }
+    #principal ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 25px;
+      text-align: left;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 15px;
+    }
+    #principal ul li {
+      background: rgba(0, 90, 180, 0.4);
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+      border-left: 5px solid var(--cor-borda);
+      word-spacing: normal; /* Garante espaçamento normal */
+    }
+    #principal ul li:hover {
+      background: rgba(0, 90, 180, 0.6);
+      transform: translateX(5px);
+    }
+    #principal ul li::before {
+        content: '💎'; /* Ícone de diamante */
+        font-size: 1.2rem;
+        margin-right: 5px;
+    }
+    #principal .main-cta {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    /* Seção de Equipe */
+    .team-section {
+      text-align: center;
+    }
+
+    .team-members {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .team-role-card {
+        background: rgba(0, 60, 120, 0.6);
+        border: 1px solid var(--cor-primaria);
+        border-radius: 15px;
+        padding: 25px;
+        min-width: 280px;
+        box-shadow: var(--sombra-media);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .team-role-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 0 25px var(--cor-primaria);
+    }
+
+    .member-role {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      color: var(--destaque-amarelo);
+      margin-top: 0;
+      margin-bottom: 20px;
+      text-shadow: var(--sombra-media);
+    }
+
+    .member-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 1.2rem;
+      color: var(--cor-texto-claro);
+    }
+
+    .member-list li {
+      margin-bottom: 10px;
+      padding: 8px 15px;
+      background: rgba(0, 90, 180, 0.3);
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+    .member-list li:hover {
+        background-color: rgba(0, 90, 180, 0.5);
+    }
+
+
+    /* Produtos */
+    .produtos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Cards maiores */
+      gap: 30px; /* Mais espaçamento */
+      justify-content: center;
+      padding-top: 30px;
+    }
+
+    .produto {
+      background: var(--cor-fundo-card);
+      border: 2px solid var(--cor-borda); /* Borda mais visível */
+      border-radius: 25px; /* Mais arredondado */
+      padding: 30px; /* Mais padding */
+      text-align: center;
+      box-shadow: var(--sombra-forte);
+      cursor: grab;
+      transition: all 0.4s ease; /* Transição mais suave */
+      user-select: none;
+      color: var(--cor-texto-claro);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden; /* Para o efeito de brilho */
+      animation: fadeInCard 0.6s ease-out forwards; /* Animação de fade-in para os cards */
+    }
+    @keyframes fadeInCard {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .produto::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(70, 130, 180, 0.2) 0%, transparent 70%);
+      transform: rotate(45deg);
+      transition: all 0.7s ease;
+      opacity: 0;
+    }
+    .produto:hover::before {
+      opacity: 1;
+      top: -20%;
+      left: -20%;
+    }
+    .produto:active {
+      cursor: grabbing;
+      box-shadow: var(--sombra-forte);
+      transform: scale(1.02);
+    }
+    .produto:hover {
+      transform: translateY(-8px) scale(1.02); /* Efeito de levitação mais pronunciado */
+      box-shadow: 0 0 35px var(--cor-borda), 0 0 50px rgba(0, 123, 255, 0.9); /* Sombra mais forte */
+      border-color: var(--cor-primaria);
+    }
+
+    /* Estilo para as imagens dos kits */
+    .kit-imagem {
+        max-width: 150px; /* Tamanho da imagem maior */
+        height: auto;
+        display: block;
+        margin: 0 auto 25px auto; /* Mais espaçamento */
+        border-radius: 15px; /* Mais arredondamento */
+        box-shadow: 0 0 20px var(--cor-borda), 0 0 30px rgba(0, 123, 255, 0.7); /* Brilho intenso */
+        border: 3px solid var(--cor-primaria); /* Borda mais grossa */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .produto:hover .kit-imagem {
+      transform: scale(1.05); /* Zoom na imagem ao passar o mouse */
+      box-shadow: 0 0 25px var(--cor-borda), 0 0 40px rgba(0, 123, 255, 0.9);
+    }
+
+    .produto h3 {
+      margin-bottom: 12px;
+      font-size: 1.8rem; /* Título maior */
+      color: var(--cor-texto-medio);
+      text-shadow: var(--sombra-media);
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .produto p {
+      margin-bottom: 10px;
+      font-size: 1rem; /* Tamanho de fonte um pouco maior */
+      color: var(--cor-texto-claro);
+      line-height: 1.5;
+    }
+
+    .produto strong {
+      display: block;
+      font-size: 1.5rem; /* Preço maior */
+      color: var(--cor-borda);
+      text-shadow: var(--sombra-forte);
+      margin-top: 20px;
+      font-weight: 800; /* Mais negrito */
+      letter-spacing: 0.5px;
+    }
+
+    .botao-comprar {
+      background: linear-gradient(90deg, var(--cor-primaria), var(--cor-borda)); /* Gradiente no botão */
+      color: white;
+      border: none;
+      padding: 15px 30px; /* Mais padding */
+      margin-top: 25px;
+      cursor: pointer;
+      font-weight: 700;
+      border-radius: 35px; /* Bem arredondado */
+      box-shadow: var(--sombra-media);
+      transition: all 0.3s ease;
+      user-select: none;
+      font-size: 1.15rem; /* Tamanho da fonte maior */
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      position: relative;
+      z-index: 2; /* Garante que o botão esteja acima do brilho do card */
+    }
+    .botao-comprar:hover {
+      background: linear-gradient(90deg, var(--cor-borda), var(--cor-primaria)); /* Inverte o gradiente no hover */
+      transform: translateY(-3px) scale(1.02); /* Efeito de levitação e leve zoom */
+      box-shadow: var(--sombra-forte);
+    }
+
+    /* Popup Pix */
+    .pix-popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.95); /* Fundo quase preto para contraste */
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      user-select: text;
+      backdrop-filter: blur(8px); /* Desfoque mais forte */
+      animation: fadeInOverlay 0.3s ease forwards;
+    }
+
+    @keyframes fadeInOverlay {
+      from { background-color: rgba(0,0,0,0); backdrop-filter: blur(0px); }
+      to { background-color: rgba(0,0,0,0.95); backdrop-filter: blur(8px); }
+    }
+
+    .pix-box {
+      background: linear-gradient(160deg, var(--cor-secundaria), var(--cor-fundo-base)); /* Gradiente mais dinâmico */
+      padding: 40px 50px; /* Mais padding */
+      border-radius: 25px; /* Mais arredondado */
+      text-align: center;
+      border: 3px solid var(--cor-borda); /* Borda mais grossa */
+      box-shadow: 0 0 40px var(--cor-borda), 0 0 60px rgba(0, 123, 255, 0.8); /* Brilho forte */
+      max-width: 550px; /* Largura máxima maior */
+      width: 95%;
+      color: var(--cor-texto-claro);
+      font-size: 1.3rem; /* Texto maior */
+      font-weight: 600;
+      animation: popIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+      position: relative; /* Para o botão de copiar */
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.4); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .pix-box h2 {
+      margin-bottom: 30px;
+      text-shadow: var(--sombra-forte);
+      color: var(--cor-primaria);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem; /* Título maior */
+      animation: neonGlowText 1.5s ease-in-out infinite alternate; /* Animação de brilho no título do popup */
+    }
+
+    @keyframes neonGlowText {
+      from { text-shadow: 0 0 10px var(--cor-primaria), 0 0 20px var(--cor-borda); }
+      to { text-shadow: 0 0 15px var(--cor-primaria), 0 0 25px var(--cor-borda); }
+    }
+
+    .pix-box p {
+      margin-bottom: 25px; /* Mais espaçamento */
+    }
+
+    .pix-key-container {
+      position: relative;
+      margin: 20px auto;
+      width: fit-content; /* Ajusta a largura ao conteúdo */
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background-color: rgba(255, 255, 255, 0.15); /* Fundo mais claro para a chave */
+      border: 2px dashed var(--cor-borda); /* Borda dashed mais visível */
+      padding: 12px 18px; /* Mais padding */
+      border-radius: 12px;
+      box-shadow: inset 0 0 10px rgba(70, 130, 180, 0.3); /* Sombra interna sutil */
+      transition: all 0.2s ease;
+      cursor: pointer; /* Indica que é clicável */
+    }
+    .pix-key-container:hover {
+      background-color: rgba(255, 255, 255, 0.25);
+      box-shadow: inset 0 0 15px rgba(70, 130, 180, 0.5);
+    }
+
+
+    .pix-key {
+      font-family: 'Consolas', 'Courier New', monospace; /* Fonte mais técnica */
+      font-size: 1.2em; /* Tamanho da fonte maior */
+      color: var(--cor-texto-medio);
+      word-break: break-all;
+      flex-grow: 1; /* Permite que a chave ocupe o espaço disponível */
+      text-align: center; /* Centraliza a chave dentro do container */
+    }
+
+    .copy-btn {
+      background-color: var(--cor-primaria);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px; /* Padding aprimorado */
+      font-size: 1em; /* Tamanho da fonte maior */
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: var(--sombra-leve);
+      font-weight: 600;
+    }
+    .copy-btn:hover {
+      background-color: var(--cor-borda);
+      transform: scale(1.05);
+    }
+    .copy-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Mensagem de sucesso ao copiar */
+    .copy-success-message {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #28a745; /* Verde para sucesso */
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        z-index: 10000;
+    }
+    .copy-success-message.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Mensagem de "Envie o comprovante" */
+    .proof-instructions {
+      background-color: rgba(255, 77, 77, 0.2); /* Fundo vermelho sutil para atenção */
+      border-left: 5px solid var(--red-attention); /* Borda vermelha forte */
+      padding: 20px 25px; /* Mais padding */
+      margin-top: 30px;
+      border-radius: 8px;
+      font-size: 1.15em; /* Fonte um pouco maior */
+      line-height: 1.6;
+      text-align: left;
+      animation: fadeIn 0.8s ease-out;
+      color: #FFF; /* Texto branco para melhor contraste */
+    }
+    .proof-instructions p {
+      margin: 0 0 10px 0; /* Espaçamento entre parágrafos */
+      color: inherit; /* Herda a cor do pai */
+    }
+    .proof-instructions strong {
+      color: var(--red-attention); /* Cor vermelha para o texto em negrito */
+      font-family: 'Orbitron', sans-serif; /* Fonte para destacar */
+      font-size: 1.2em; /* Tamanho do negrito */
+      text-shadow: 0 0 8px rgba(255, 77, 77, 0.7);
+    }
+    .proof-instructions .discord-link {
+      color: var(--cor-borda); /* Cor azul para o link do discord */
+      text-decoration: underline;
+      font-weight: 700;
+      transition: color 0.3s ease;
+    }
+    .proof-instructions .discord-link:hover {
+      color: var(--cor-primaria);
+    }
+
+
+    .pix-box button {
+      margin-top: 35px; /* Mais espaçamento */
+      padding: 16px 35px; /* Mais padding */
+      border: none;
+      border-radius: 35px;
+      cursor: pointer;
+      background: linear-gradient(90deg, var(--cor-primaria), var(--cor-borda));
+      color: white;
+      font-weight: 700;
+      font-size: 1.25rem; /* Botão maior */
+      box-shadow: var(--sombra-forte);
+      transition: all 0.3s ease;
+      user-select: none;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+    .pix-box button:hover {
+      background: linear-gradient(90deg, var(--cor-borda), var(--cor-primaria));
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 0 25px var(--cor-borda);
+    }
+
+    /* Discord Button Style */
+    .discord-button {
+        display: inline-block;
+        background: linear-gradient(90deg, #7289DA, #6a7ec6); /* Cor do Discord */
+        color: white;
+        padding: 15px 30px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.2rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-top: 20px;
+    }
+    .discord-button:hover {
+        background: linear-gradient(90deg, #6a7ec6, #7289DA);
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Estilos para a aba de contato e suporte */
+    #discord-info .contact-box {
+      background: rgba(0, 60, 120, 0.6);
+      border: 1px solid var(--cor-borda);
+      border-radius: 15px;
+      padding: 30px;
+      margin-top: 30px;
+      text-align: center;
+      box-shadow: var(--sombra-media);
+      line-height: 1.6;
+    }
+    #discord-info .contact-box p {
+      font-size: 1.15rem;
+      margin-bottom: 20px;
+    }
+    #discord-info .contact-box ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+      display: inline-block; /* Para centralizar a lista */
+    }
+    #discord-info .contact-box ul li {
+      background: rgba(0, 90, 180, 0.3);
+      padding: 10px 15px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.1rem;
+      border-left: 3px solid var(--destaque-verde);
+    }
+    #discord-info .contact-box ul li::before {
+        content: '✅'; /* Ícone de check */
+        font-size: 1.1rem;
+    }
+    #discord-info .contact-box .highlight-discord {
+        color: var(--destaque-verde);
+        font-weight: 700;
+        text-shadow: 0 0 8px rgba(50, 205, 50, 0.5);
+    }
+
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.8rem;
+      }
+      header p {
+        font-size: 1.1rem;
+      }
+      nav {
+        gap: 15px;
+        flex-wrap: wrap;
+        padding: 15px;
+      }
+      nav button {
+        padding: 12px 25px;
+        font-size: 1rem;
+        transform: skewX(0deg); /* Remove inclinação em mobile */
+      }
+      nav button:hover, nav button.active {
+        transform: translateY(-3px) skewX(0deg);
+      }
+      .produtos {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+      .produto {
+        max-width: 380px;
+        margin: 0 auto;
+        padding: 25px;
+      }
+      .produto h3 {
+        font-size: 1.5rem;
+      }
+      .produto strong {
+        font-size: 1.3rem;
+      }
+      .kit-imagem {
+          max-width: 120px;
+      }
+      #logo {
+        width: 150px;
+        height: 150px;
+      }
+      .pix-box {
+        padding: 30px 35px;
+      }
+      .pix-box h2 {
+        font-size: 2rem;
+      }
+      .pix-box p {
+        font-size: 1.1rem;
+      }
+      .pix-key-container {
+        flex-direction: column; /* Empilha a chave e o botão em telas pequenas */
+        padding: 15px;
+      }
+      .pix-key {
+        font-size: 1em;
+        text-align: center;
+        width: 100%;
+      }
+      .copy-btn {
+        position: static; /* Remove posicionamento absoluto */
+        transform: none;
+        margin-top: 10px; /* Espaçamento entre chave e botão */
+        width: 80%; /* Ocupa mais largura */
+      }
+      .tab-content h2 {
+        font-size: 2rem;
+      }
+      .highlight-text {
+        font-size: 1.2rem;
+      }
+      #principal ul {
+        grid-template-columns: 1fr;
+      }
+      .team-role-card {
+        min-width: unset;
+        width: 100%;
+      }
+      .member-role {
+        font-size: 1.5rem;
+      }
+      .member-list {
+        font-size: 1.1rem;
+      }
+      .proof-instructions {
+        padding: 15px 20px;
+        font-size: 1em;
+      }
+      .proof-instructions strong {
+        font-size: 1.1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div id="logo" draggable="true" title="Arraste o logo"></div>
+    <h1>Loja Ultra Craft</h1>
+    <p>Bem-vindo(a) à sua central para turbinar sua aventura no Ultra Craft!</p>
+  </header>
+  <nav>
+    <button class="tab-btn active" data-tab="principal">Início</button>
+    <button class="tab-btn" data-tab="kits">Nossos Kits</button>
+    <button class="tab-btn" data-tab="team-info">Nossa Equipe</button>
+    <button class="tab-btn" data-tab="discord-info">Contato & Suporte</button>
+  </nav>
+  <main>
+    <section id="principal" class="tab-content active">
+      <h2 style="margin-bottom: 20px;">🎮 Bem-vindo(a) ao Universo Ultra Craft! 🚀</h2>
+      <p class="highlight-text">
+        O Ultra Craft é o seu destino final para uma experiência de semi anarquia sem igual!
+        Prepare-se para desafios intensos, liberdade total e uma comunidade vibrante.
+      </p>
+      <p>
+        Mergulhe em um mundo onde a aventura nunca termina. Nosso servidor de semi anarquia foi cuidadosamente
+        melhorado para oferecer a você o melhor conteúdo e a mais pura diversão. Aqui, suas escolhas importam,
+        e cada batalha é uma oportunidade de glória!
+      </p>
+      <p>
+        O que você encontra no Ultra Craft:
+      </p>
+      <ul>
+        <li>💎 Experiência de jogo otimizada e sem lag.</li>
+        <li>⚔️ Batalhas PvP emocionantes e recompensadoras.</li>
+        <li>🗺️ Liberdade para construir e destruir sem limites.</li>
+        <li>🎉 Eventos especiais e atualizações constantes.</li>
+        <li>🤝 Uma comunidade ativa e acolhedora.</li>
+      </ul>
+      <p style="margin-top: 30px;">
+        Explore a aba <strong>"Nossos Kits"</strong> para descobrir os pacotes que vão transformar sua jornada.
+        Equipe-se com o melhor e torne-se uma lenda no Ultra Craft!
+      </p>
+      <div class="main-cta">
+          <button class="botao-comprar" onclick="document.querySelector('[data-tab=kits]').click()">Ver Nossos Kits</button>
+      </div>
+    </section>
+
+    <section id="kits" class="tab-content">
+      <h2>🔥 Kits Exclusivos para Dominar o Jogo 🔥</h2>
+      <p class="highlight-text">
+        Prepare-se para elevar seu nível no Ultra Craft! Nossos kits são projetados para te dar a vantagem
+        necessária em qualquer situação, do combate à exploração.
+      </p>
+      <div class="produtos">
+        <div class="produto" draggable="true" title="Arraste este kit">
+          <img src="./logo/supremo.png" alt="Kit SUPREMO" class="kit-imagem">
+          <h3>Kit SUPREMO</h3>
+          <strong>R$14,99</strong>
+          <p>O kit definitivo para dominar o campo de batalha com equipamentos lendários e recursos incomparáveis. Seja imparável!</p>
+          <button class="botao-comprar" onclick="mostrarPix()">Comprar Agora!</button>
+        </div>
+        <div class="produto" draggable="true" title="Arraste este kit">
+          <img src="./logo/netherit-op-2.png" alt="Kit NETHERIT OP 2" class="kit-imagem">
+          <h3>Kit NETHERIT OP 2</h3>
+          <strong>R$11,99</strong>
+          <p>Equipamentos de netherite super poderosos, com encantamentos avançados para garantir sua sobrevivência e vitória.</p>
+          <button class="botao-comprar" onclick="mostrarPix()">Comprar Agora!</button>
+        </div>
+        <div class="produto" draggable="true" title="Arraste este kit">
+          <img src="./logo/netherit-op-1.png" alt="Kit NETHERIT OP 1" class="kit-imagem">
+          <h3>Kit NETHERIT OP 1</h3>
+          <strong>R$9,99</strong>
+          <p>Armaduras e ferramentas de netherite de alta qualidade para você começar com uma vantagem esmagadora!</p>
+          <button class="botao-comprar" onclick="mostrarPix()">Comprar Agora!</button>
+        </div>
+        <div class="produto" draggable="true" title="Arraste este kit">
+          <img src="./logo/dima-op.png" alt="Kit DIMA OP" class="kit-imagem">
+          <h3>Kit DIMA OP</h3>
+          <strong>R$5,99</strong>
+          <p>Kits de diamante aprimorados, perfeitos para quem busca um equilíbrio entre defesa e ataque eficaz.</p>
+          <button class="botao-comprar" onclick="mostrarPix()">Comprar Agora!</button>
+        </div>
+        <div class="produto" draggable="true" title="Arraste este kit">
+          <img src="./logo/explosivo.png" alt="Kit EXPLOSIVO" class="kit-imagem">
+          <h3>Kit EXPLOSIVO</h3>
+          <strong>R$5,50</strong>
+          <p>Liberte o caos! Muitos explosivos e TNT para estratégias de ataque e defesa inovadoras. Cuidado onde pisa!</p>
+          <button class="botao-comprar" onclick="mostrarPix()">Comprar Agora!</button>
+        </div>
+        <div class="produto" draggable="true" title="Arraste este kit">
+          <img src="./logo/xp-mais-fogos.png" alt="Kit XP MAIS FOGOS" class="kit-imagem">
+          <h3>Kit XP MAIS FOGOS</h3>
+          <strong>R$3,50</strong>
+          <p>Acelere seu progresso com XP extra e celebre suas conquistas com um arsenal de fogos de artifício!</p>
+          <button class="botao-comprar" onclick="mostrarPix()">Comprar Agora!</button>
+        </div>
+      </div>
+      <p style="margin-top: 40px; text-align: center; font-size: 1.1rem; color: var(--cor-texto-medio);">
+        Ao clicar em "Comprar Agora!", você será direcionado(a) para as instruções de pagamento via Pix.
+        Lembre-se de enviar o comprovante no Discord para a liberação do seu kit!
+      </p>
+    </section>
+
+    <section id="team-info" class="tab-content">
+        <div class="team-section">
+            <h2>💎 Conheça a Equipe Ultra Craft 💎</h2>
+            <p class="highlight-text">
+                Nossa equipe é a força motriz por trás do Ultra Craft, dedicada a proporcionar a melhor experiência de jogo para você!
+            </p>
+            <div class="team-members">
+                <div class="team-role-card">
+                    <h3 class="member-role">✨ Donos ✨</h3>
+                    <ul class="member-list">
+                        <li>Precs</li>
+                        <li>DG</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 0.95rem;">
+                        Os visionários que constroem e guiam o futuro do Ultra Craft.
+                    </p>
+                </div>
+                <div class="team-role-card">
+                    <h3 class="member-role">🛡️ Administradores 🛡️</h3>
+                    <ul class="member-list">
+                        <li>Misumy</li>
+                        <li>Pedrex</li>
+                        <li>Emano</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 0.95rem;">
+                        Garantindo a ordem, suporte e a diversão contínua no servidor.
+                    </p>
+                </div>
+            </div>
+            <p style="margin-top: 25px; font-size: 1.1rem; color: var(--cor-texto-claro);">
+                Trabalhamos incansavelmente para manter o Ultra Craft um ambiente justo, divertido e sempre inovador.
+                Sua satisfação é nossa prioridade!
+            </p>
+        </div>
+    </section>
+
+    <section id="discord-info" class="tab-content">
+        <h2>💬 Discord & Suporte: Conecte-se Conosco! 📞</h2>
+        <p class="highlight-text">
+            O Discord é o coração da nossa comunidade! Receba suporte rápido, tire dúvidas e conecte-se com outros jogadores.
+        </p>
+        <div class="contact-box">
+            <p>
+                Precisa de ajuda? Tem alguma dúvida? Quer reportar algo ou simplesmente conversar com a comunidade?
+                Nosso servidor no Discord é o lugar ideal!
+            </p>
+            <p>
+                Nele você pode:
+            </p>
+            <ul>
+                <li>Obter suporte rápido para qualquer problema.</li>
+                <li>Tirar suas dúvidas sobre o servidor e os kits.</li>
+                <li>Enviar comprovantes Pix para liberação imediata dos seus kits.</li>
+                <li>Conectar-se com a comunidade Ultra Craft e fazer novos amigos.</li>
+                <li>Ficar por dentro de eventos, novidades e promoções exclusivas!</li>
+            </ul>
+            <p style="margin-top: 30px;">
+                Não fique de fora! Clique no botão abaixo e junte-se à nossa família no Discord:
+            </p>
+            <p>
+                <a href="https://discord.gg/bBWCGaTj" target="_blank" rel="noopener noreferrer" class="discord-button">
+                    Entrar no Discord do Ultra Craft
+                </a>
+            </p>
+            <p style="margin-top: 30px; font-size: 1rem; color: var(--cor-texto-medio);">
+                Nosso suporte está disponível para te ajudar com agilidade e eficiência. <span class="highlight-discord">Sua experiência é nossa prioridade!</span>
+            </p>
+        </div>
+    </section>
+  </main>
+
+  <div class="pix-popup" id="pixPopup">
+    <div class="pix-box" role="dialog" aria-modal="true" aria-labelledby="pixTitle">
+      <h2 id="pixTitle">🚀 Finalize sua Compra com Pix! 🚀</h2>
+      <p>
+        Para garantir a **liberação imediata** do seu kit, realize o pagamento para a chave Pix abaixo. É rápido e seguro!
+      </p>
+      <div class="pix-key-container">
+        <div class="pix-key" id="pixKeyToCopy">888e9afa-0eeb-432b-b4b3-bcecda86b57e</div>
+        <button class="copy-btn" onclick="copiarPix()">Copiar Chave</button>
+      </div>
+      <div class="proof-instructions">
+        <p>⚠️ ATENÇÃO MÁXIMA!</p>
+        <p>Após a realização do pagamento, é CRUCIAL que você nos envie o COMPROVANTE diretamente no nosso servidor do Discord.</p>
+        <p>Apenas com o comprovante em mãos, nossa equipe consegue liberar seu kit na hora!</p>
+        <p>
+          <a href="https://discord.gg/bBWCGaTj" target="_blank" rel="noopener noreferrer" class="discord-link">➡️ Clique aqui para ir para o Discord agora e enviar seu comprovante!</a>
+        </p>
+      </div>
+      <button onclick="fecharPix()">Entendi, Fechar e Ir para o Discord!</button>
+    </div>
+  </div>
+  <div class="copy-success-message" id="copySuccessMessage">Chave Pix copiada para a área de transferência!</div>
+  <script>
+    // Controle de abas
+    const tabs = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabs.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const target = btn.getAttribute('data-tab');
+        tabContents.forEach(tc => {
+          tc.classList.remove('active');
+          // Pequeno atraso para a animação de entrada
+          setTimeout(() => {
+            if (tc.id === target) {
+              tc.classList.add('active');
+            }
+          }, 50); // Atraso reduzido para 50ms para uma transição mais fluida
+        });
+      });
+    });
+
+    // Inicializa a primeira aba como ativa ao carregar a página
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelector('.tab-btn').click(); // Simula o clique no primeiro botão
+    });
+
+    // Popup Pix
+    function mostrarPix() {
+      document.getElementById('pixPopup').style.display = 'flex';
+    }
+    function fecharPix() {
+      document.getElementById('pixPopup').style.display = 'none';
+      // Abre o Discord automaticamente ao fechar o popup se o usuário clicou para comprar
+      window.open('https://discord.gg/bBWCGaTj', '_blank');
+    }
+
+    // Função para copiar a chave Pix
+    function copiarPix() {
+      const pixKey = document.getElementById('pixKeyToCopy').innerText;
+      navigator.clipboard.writeText(pixKey).then(() => {
+        const message = document.getElementById('copySuccessMessage');
+        message.classList.add('show');
+        setTimeout(() => {
+          message.classList.remove('show');
+        }, 2000); // Mensagem some após 2 segundos
+      }).catch(err => {
+        console.error('Falha ao copiar o texto: ', err);
+      });
+    }
+
+    // Drag & Drop Logo e Produtos (funcionalidade opcional/decorativa)
+    function dragStart(e) {
+      e.dataTransfer.setData('text/plain', e.target.id || e.target.innerText);
+      e.dataTransfer.effectAllowed = "move";
+      e.target.style.opacity = '0.5';
+    }
+
+    function dragEnd(e) {
+      e.target.style.opacity = '1';
+    }
+
+    const logo = document.getElementById('logo');
+    logo.addEventListener('dragstart', dragStart);
+    logo.addEventListener('dragend', dragEnd);
+
+    const produtos = document.querySelectorAll('.produto');
+    produtos.forEach(produto => {
+      produto.addEventListener('dragstart', dragStart);
+      produto.addEventListener('dragend', dragEnd);
+    });
+  </script>
+</body>
+</html>
